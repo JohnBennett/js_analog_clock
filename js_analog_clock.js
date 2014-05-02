@@ -1,6 +1,6 @@
 //main function
 window.onload = function (){
-	var size = 50
+	var size = 100;
 	 //to do: create a circle with numbers
 	 makeClockFace( size );
 	 //to do: create hands 
