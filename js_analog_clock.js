@@ -26,10 +26,10 @@ function makeClockHands(){
 	moveDivs( secondHand, secondID );
 }
  //add divs for the numbers of the clock face to the DOM 
-function createDivs( numberOfDivs, idName, innerHTML ){
-	for( var i=0; i < numberOfDivs; i++ ){
+function createDivs( _numberOfDivs, _idName, innerHTML ){
+	for( var i=0; i < _numberOfDivs; i++ ){
 		div = document.createElement( "div" );
-		div.id = idName + ( i + 1 );
+		div.id = _idName + ( i + 1 );
 		//bit of hackery on the next line for the sake of code reuse
 		div.innerHTML = ( innerHTML === "" ? ( i + 1 ) : innerHTML );
 		div.style.position = "absolute";
@@ -38,57 +38,40 @@ function createDivs( numberOfDivs, idName, innerHTML ){
 }
 
 //puts clock face number divs in a circle
-function moveDivs( numberOfDivs, idName ){
+function moveDivs( _numberOfDivs, _idName ){
 	var degrees = 360;
 	var degree = 30;
 	var convertToRadian = Math.PI / 180;
 	var degreeOffset = 90;
 	var clockRadius = 50;
 	var incrementValue;
-	if( idName === "num" ){
-		incrementValue = degrees / numberOfDivs;
+	if( _idName === "num" ){
+		incrementValue = degrees / _numberOfDivs;
 	}else{
-		incrementValue = clockRadius / numberOfDivs;
+		incrementValue = clockRadius / _numberOfDivs;
 		clockRadius = 0;
 	}
 	cout( clockRadius );
 
-	for( var i = 0; i < numberOfDivs; i++ ){
+	for( var i = 0; i < _numberOfDivs; i++ ){
 		var top = clockRadius * Math.sin( ( degree - degreeOffset ) * convertToRadian );
 		var left = clockRadius * Math.cos( ( degree - degreeOffset ) * convertToRadian );
-		id( idName + ( i + 1 ) ).style.position = "absolute";
-		id( idName + ( i + 1 ) ).style.top = top + "px";
+		id( _idName + ( i + 1 ) ).style.position = "absolute";
+		id( _idName + ( i + 1 ) ).style.top = top + "px";
 
 		//fix this for refractoring
-		if( idName === "num" && i > 8 ){ 
-			id( idName + ( i + 1 ) ).style.left = ( left - 4 ) + "px";
+		if( _idName === "num" && i > 8 ){ 
+			id( _idName + ( i + 1 ) ).style.left = ( left - 4 ) + "px";
 		}else{
-			id( idName + ( i + 1 ) ).style.left = left + "px";
+			id( _idName + ( i + 1 ) ).style.left = left + "px";
 		}
 
-		if( idName === "num" ){
+		if( _idName === "num" ){
 			degree += incrementValue;
 		}else{
 			clockRadius += incrementValue;
 		}
 		cout( clockRadius );
 		cout( incrementValue );
-	}
-}
-
-function makeLine( numberOfDots, idName ){
-	var clockRadius = 50;
-	var dotIncrement = clockRadius / numberOfDots;
-	var radius = 0;
-	var degree = 270;
-	var degreeOffset = 90;
-	var convertToRadian = Math.PI / 180;
-
-	for( var i = 0; i < numberOfDots; i++ ){
-		var top = radius * Math.sin( ( degree - degreeOffset ) * convertToRadian ); 	
-		var left = radius * Math.cos( ( degree - degreeOffset ) * convertToRadian );
-		id( idName + ( i + 1 ) ).style.top = top + "px";
-		id( idName + ( i + 1 ) ).style.left = left + "px";
-		radius += dotIncrement;
 	}
 }
