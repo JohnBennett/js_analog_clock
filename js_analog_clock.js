@@ -1,6 +1,6 @@
 //main function
 window.onload = function (){
-	var size = 100;
+	var size = 50;
 	 //to do: create a circle with numbers
 	 makeClockFace( size );
 	 //to do: create hands 
@@ -21,23 +21,29 @@ function makeClockFace( _size ){
 }
 
 function makeClockHands( _size ){
+	var date = new Date();
+	cout( 360 / 60 );
 	//create the second hand
-	var secondHand = 7;
+	var secondHand = Math.floor( _size * 0.15 );
 	var secondID = "second";
+	var size = Math.floor( _size * 1.1 );
+	var degree = date.getSeconds() * 6;
 	createDivs( secondHand, secondID, "." );
-	moveDivs( secondHand, secondID, 0, _size );
+	setInterval( function (){moveDivs( secondHand, secondID, degree, size )}, 1000);
 
 	//create the minute hand
-	var minuteHand = 7;
+	var minuteHand = Math.floor( _size * .12 );
 	var minuteID = "minute";
+	var size = _size; 
 	createDivs( minuteHand, minuteID, "." );
-	moveDivs( minuteHand, minuteID, 30, _size ); 
+	moveDivs( minuteHand, minuteID, 30, size ); 
 
 	//create the hour hand
-	var hourHand = 7;
+	var hourHand = Math.floor( _size * .12 );
 	var hourID = "hour";
+	var size = Math.floor( _size * 0.8 );
 	createDivs( hourHand, hourID, "." );
-	moveDivs( hourHand, hourID, 60, _size ); 
+	moveDivs( hourHand, hourID, 60, size ); 
 }
  //add divs for the numbers of the clock face to the DOM 
 function createDivs( _numberOfDivs, _idName, _innerHTML ){
@@ -61,8 +67,8 @@ function moveDivs( _numberOfDivs, _idName, _degree, _size ){
 	var incrementValue;
 
 	//checks if creating clock face or hands
-	//if clock face, the for loop will iterate degrees
-	//if clock hands, the for loop will iterate the radius
+	//if clock face, the for loop will increase degrees
+	//if clock hands, the for loop will increase the radius
 	if( _idName === "num" ){
 		incrementValue = degrees / _numberOfDivs;
 	}else{
