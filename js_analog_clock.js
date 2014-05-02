@@ -4,7 +4,7 @@ window.onload = function (){
 	 //to do: create a circle with numbers
 	 makeClockFace( size );
 	 //to do: create hands 
-	 makeClockHands( size );
+	 setInterval( function(){ makeClockHands( size ) }, 500 );
 	 //to do: make em move
 };
 
@@ -29,7 +29,7 @@ function makeClockHands( _size ){
 	var size = Math.floor( _size * 1.1 );
 	var degree = date.getSeconds() * 6;
 	createDivs( secondHand, secondID, "." );
-	setInterval( function (){moveDivs( secondHand, secondID, degree, size )}, 1000);
+	moveDivs( secondHand, secondID, degree, size );
 
 	//create the minute hand
 	var minuteHand = Math.floor( _size * .12 );
