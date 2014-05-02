@@ -1,0 +1,21 @@
+radius
+angle
+start at center point
+end at extension of radius
+
+
+use an adjusting right triangle to calculate the circumference
+the radius of the circle becomes the hypotenuse of the right triangle
+
+the use of sine and cosine can be used to "move" the radius around
+
+the angle can be used for discovering the x and y positions
+therefore:
+
+	radius = 4
+	angle = 30
+
+	y = radius * sin( angle )
+	x = radius * cos( angle )
+
+javascript evaluates sin, cos and tan with radians, so Math.PI / 180 should be used.
