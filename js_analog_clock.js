@@ -1,9 +1,10 @@
 //main function
 window.onload = function (){
+	var size = 50
 	 //to do: create a circle with numbers
-	 makeClockFace();
+	 makeClockFace( size );
 	 //to do: create hands 
-	 makeClockHands();
+	 makeClockHands( size );
 	 //to do: make em move
 };
 
@@ -11,32 +12,32 @@ window.onload = function (){
 function cout( string ){ console.log( string ); }
 function id( string ){ return document.getElementById( string ); }
 
-function makeClockFace(){
+function makeClockFace( _size ){
 	//create and move divs
 	//empty string in third arg tells createDivs to use
 	//counter as innerHTML
 	createDivs(12, "num", "" );
-	moveDivs(12, "num", 30);
+	moveDivs(12, "num", 30, _size );
 }
 
-function makeClockHands(){
+function makeClockHands( _size ){
 	//create the second hand
 	var secondHand = 7;
 	var secondID = "second";
 	createDivs( secondHand, secondID, "." );
-	moveDivs( secondHand, secondID, 0 );
+	moveDivs( secondHand, secondID, 0, _size );
 
 	//create the minute hand
 	var minuteHand = 7;
 	var minuteID = "minute";
 	createDivs( minuteHand, minuteID, "." );
-	moveDivs( minuteHand, minuteID, 30 ); 
+	moveDivs( minuteHand, minuteID, 30, _size ); 
 
 	//create the hour hand
 	var hourHand = 7;
 	var hourID = "hour";
 	createDivs( hourHand, hourID, "." );
-	moveDivs( hourHand, hourID, 60 ); 
+	moveDivs( hourHand, hourID, 60, _size ); 
 }
  //add divs for the numbers of the clock face to the DOM 
 function createDivs( _numberOfDivs, _idName, _innerHTML ){
@@ -51,12 +52,12 @@ function createDivs( _numberOfDivs, _idName, _innerHTML ){
 }
 
 //puts clock face number divs in a circle
-function moveDivs( _numberOfDivs, _idName, _degree ){
+function moveDivs( _numberOfDivs, _idName, _degree, _size ){
 	var degrees = 360;
 	var degree = _degree;
 	var convertToRadian = Math.PI / 180;
 	var degreeOffset = 90;
-	var clockRadius = 50;
+	var clockRadius = _size;
 	var incrementValue;
 
 	//checks if creating clock face or hands
