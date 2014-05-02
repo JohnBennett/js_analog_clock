@@ -23,7 +23,7 @@ function makeClockHands(){
 	var secondHand = 7;
 	var secondID = "second";
 	createDivs( secondHand, secondID, "." );
-	makeLine( secondHand, secondID );
+	moveDivs( secondHand, secondID );
 }
  //add divs for the numbers of the clock face to the DOM 
 function createDivs( numberOfDivs, idName, innerHTML ){
@@ -43,11 +43,10 @@ function moveDivs( numberOfDivs, idName ){
 	var degree = 30;
 	var convertToRadian = Math.PI / 180;
 	var degreeOffset = 90;
+	var clockRadius = 50;
 	var incrementValue;
-	var clockRadius;
 	if( idName === "num" ){
 		incrementValue = degrees / numberOfDivs;
-		clockRadius = 50;
 	}else{
 		incrementValue = clockRadius / numberOfDivs;
 		clockRadius = 0;
@@ -72,6 +71,8 @@ function moveDivs( numberOfDivs, idName ){
 		}else{
 			clockRadius += incrementValue;
 		}
+		cout( clockRadius );
+		cout( incrementValue );
 	}
 }
 
