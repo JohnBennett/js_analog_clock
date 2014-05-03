@@ -24,15 +24,17 @@ createDivs(12, "num", "", "black" );
 moveDivs(12, "num", 30, _size );
 }
 
+//create the hands of the clock and
+//set the date object to degrees
 function makeClockHands( _size ){
-  var date = new Date();
-
-  //create the second hand
-  var secondHand = Math.floor( _size * 0.15 );
-  var secondID = "second";
-  var size = Math.floor( _size * 1.1 );
-  var secondDegree = date.getSeconds() * 6;
-	createDivs( secondHand, secondID, ".", "red" );
+	var date = new Date();
+	var dot = "&#149";
+	//create the second hand
+	var secondHand = Math.floor( _size * 0.15 );
+	var secondID = "second";
+	var size = Math.floor( _size * 1.1 );
+	var secondDegree = date.getSeconds() * 6;
+	createDivs( secondHand, secondID, dot, "red" );
 	moveDivs( secondHand, secondID, secondDegree, size );
 
 	//create the minute hand
@@ -40,7 +42,7 @@ function makeClockHands( _size ){
 	var minuteID = "minute";
 	var size = Math.floor( _size * 1 );
 	var minuteDegree = date.getMinutes() * 6;
-	createDivs( minuteHand, minuteID, ".", "green" );
+	createDivs( minuteHand, minuteID, dot, "green" );
 	moveDivs( minuteHand, minuteID, minuteDegree, size );
 
 	//create the hour hand
@@ -48,11 +50,11 @@ function makeClockHands( _size ){
 	var hourID = "hour";
 	var size = Math.floor( _size * 0.8 );
 	var hourDegree = date.getHours() * 30;
-	createDivs( hourHand, hourID, ".", "black" );
+	createDivs( hourHand, hourID, dot, "black" );
 	moveDivs( hourHand, hourID, hourDegree, size );
 }
 
-	//add divs for the numbers of the clock face to the DOM
+//add divs for the numbers of the clock face to the DOM
 function createDivs( _numberOfDivs, _idName, _innerHTML, _color ){
 	if( id( _idName + 1 ) ){
 		return;
