@@ -1,27 +1,30 @@
 //main function
 //change the size var to adjust the widget size
 window.onload = function (){
-var size = 100;
-id( "analog_clock" ).style.cssText = 
-  "position: relative;" +
-  "top: " + size * 1.2 + "px;" +
-  "left: " + size * 1.2 + "px;";
-//create a circle with numbers
-makeClockFace( size );
-
-setInterval( function(){ makeClockHands( size ) }, 1000);
+	var size = 100;
+	setAnalogClockCSS( size );
+	makeClockFace( size );
+	setInterval( function(){ makeClockHands( size ) }, 1000);
 };
 
- //commonly used functions
+//commonly used functions
 function cout( string ){ console.log( string ); }
 function id( string ){ return document.getElementById( string ); }
 
-function makeClockFace( _size ){
+function setAnalogClockCSS( _size ){
+	id( "analog_clock" ).style.cssText =
+		"position: relative;" +
+		"top: " + _size * 1.2 + "px;" +
+		"left: " + _size * 1.2 + "px;" +
+		"font-weight: bold;";
+}
+
 //create and move clock face divs into a circle
 //empty string in third arg tells createDivs to use
 //counter as innerHTML
-createDivs(12, "num", "", "black" );
-moveDivs(12, "num", 30, _size );
+function makeClockFace( _size ){
+	createDivs(12, "num", "", "black" );
+	moveDivs(12, "num", 30, _size );
 }
 
 //create the hands of the clock and
@@ -56,21 +59,21 @@ function makeClockHands( _size ){
 
 //add divs for the numbers of the clock face to the DOM
 function createDivs( _numberOfDivs, _idName, _innerHTML, _color ){
-	if( id( _idName + 1 ) ){
+	if( id( _idName + 1 ) ){//exit function if divs exist
 		return;
 	}else{
 		for( var i=0; i < _numberOfDivs; i++ ){
-		var div = document.createElement( "div" );
-		div.id = _idName + ( i + 1 );
+			var div = document.createElement( "div" );
+			div.id = _idName + ( i + 1 );
 
-		//choose between creating the clock and creating divs
-		div.innerHTML = ( _innerHTML === "" ? ( i + 1 ) : _innerHTML );
-		div.style.position = "absolute";
-		div.style.color = _color;
-		id( "analog_clock" ).appendChild( div );	
-		}
-	}
-}
+			//choose between creating the clock and creating divs
+			div.innerHTML = ( _innerHTML === "" ? ( i + 1 ) : _innerHTML );
+			div.style.position = "absolute";
+			div.style.color = _color;
+			id( "analog_clock" ).appendChild( div );	
+		}//end for
+	}//end if
+}//end function
 
 //puts clock face number divs in a circle
 function moveDivs( _numberOfDivs, _idName, _degree, _size ){
