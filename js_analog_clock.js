@@ -1,22 +1,41 @@
-//main function
-//change the size var to adjust the widget size
+/*
+Javascript Analog Clock
+
+Change the size variable to resize.
+*/
+
+/* -- MAIN FUNCTION -- */
 window.onload = function (){
 	var size = 100;
-	setAnalogClockCSS( size );
+	setAnalogClockStyles( size );
+	var fontSize = getFontSize();
 	makeClockFace( size );
-	setInterval( function(){ makeClockHands( size ) }, 1000);
+	setInterval( function(){ makeClockHands( size, fontSize ) }, 1000);
 };
+/* -- END MAIN -- */
 
-//commonly used functions
+//convenience functions
 function cout( string ){ console.log( string ); }
 function id( string ){ return document.getElementById( string ); }
 
-function setAnalogClockCSS( _size ){
+//gets the pixel size of the font. Used
+//to change the amount of dot divs created
+//depending on the size of the font/clock
+function getFontSize(){
+	var analogClockID = id( "analog_clock" );
+	var fontSize = 
+		window.getComputedStyle( analogClockID, null ).getPropertyValue( "font-size" );
+	return parseFloat( fontSize );
+}
+
+//sets common styles for the clock
+function setAnalogClockStyles( _size ){
 	id( "analog_clock" ).style.cssText =
 		"position: relative;" +
 		"top: " + _size * 1.2 + "px;" +
 		"left: " + _size * 1.2 + "px;" +
-		"font-weight: bold;";
+		"font-weight: bold;" +
+		"font-size: " + _size * 2 + "%;";
 }
 
 //create and move clock face divs into a circle
@@ -29,30 +48,34 @@ function makeClockFace( _size ){
 
 //create the hands of the clock and
 //set the date object to degrees
-function makeClockHands( _size ){
+function makeClockHands( _size, _fontSize ){
 	var date = new Date();
 	var dot = "&#149";
+	var fontSize = _fontSize / 4;
+  
 	//create the second hand
-	var secondHand = Math.floor( _size * 0.15 );
-	var secondID = "second";
 	var size = Math.floor( _size * 1.1 );
+	var secondHand = Math.floor( size / fontSize );
+	var secondID = "second";
 	var secondDegree = date.getSeconds() * 6;
 	createDivs( secondHand, secondID, dot, "red" );
 	moveDivs( secondHand, secondID, secondDegree, size );
 
 	//create the minute hand
-	var minuteHand = Math.floor( _size * .12 );
-	var minuteID = "minute";
 	var size = Math.floor( _size * 1 );
-	var minuteDegree = date.getMinutes() * 6;
+	var minuteHand = Math.floor( size / fontSize );
+	var minuteID = "minute";
+	
+	var minuteDegree = ( date.getMinutes() * 6 ) + ( date.getSeconds() * 0.1 );
 	createDivs( minuteHand, minuteID, dot, "green" );
 	moveDivs( minuteHand, minuteID, minuteDegree, size );
 
 	//create the hour hand
-	var hourHand = Math.floor( _size * .10 );
-	var hourID = "hour";
 	var size = Math.floor( _size * 0.8 );
-	var hourDegree = date.getHours() * 30;
+	var hourHand = Math.floor( size / fontSize );
+	var hourID = "hour";
+	
+	var hourDegree = ( date.getHours() * 30 ) + ( date.getMinutes() * .5 );
 	createDivs( hourHand, hourID, dot, "black" );
 	moveDivs( hourHand, hourID, hourDegree, size );
 }
@@ -106,15 +129,18 @@ function moveDivs( _numberOfDivs, _idName, _degree, _size ){
 		//if creating the clock face and the numbers are 10 or larger
 		//create an offset to position the numbers a little better
 		if( _idName === "num" && i > 8 ){
+			id( _idName + ( i + 1 ) ).style.left = ( left - 14 ) + "px";
+		}else if( _idName === "num" ){
 			id( _idName + ( i + 1 ) ).style.left = ( left - 4 ) + "px";
 		}else{
-			id( _idName + ( i + 1 ) ).style.left = left + "px";
-		}//endif
+      id( _idName + ( i + 1 ) ).style.left = left + "px";
+    }//endif
 
 		//if creating the clock face,
 		//increment by degrees, otherwise icrement by the radius
 		if( _idName === "num" ){
 			degree += incrementValue;
+      
 		}else{
 			clockRadius += incrementValue;
 		}//end if
