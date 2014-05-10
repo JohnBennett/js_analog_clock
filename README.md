@@ -1,9 +1,3 @@
-# Hi. I made a clock. #
-
-> I made a widgetized, adjustable-sized analog clock, and you should probably check it out. Because it's awesome.  I'm pretty stoked, because it's my code.  Yep, every bleep and bloop is mine.
-
-> You should be stoked too, because, y'know, here.  Have it.  I request only a nod if you decide to use it.
-
 ### ON HOW IT'S SET UP ###
 
 The script creates a set of divs.  One set is created with the numbers 1 - 12 and the other with the strong bullet-list bullet.  The number divs are then rotated in a circle, and the dot divs are placed in a line in an angle according to the time.  The setInterval method drives the updates to the position of the 'hands' of the clock.
@@ -29,4 +23,4 @@ And that's pretty much it.  If you want to adjust the size, it can be done by ad
     	setInterval( function(){ makeClockHands( size, fontSize ) }, 1000);
     };
     
-If you want to make other changes, they can be made by hunting around in the script and finding what needs to change. Sorry about that.  It's kind of an 'As-Is' kind of thing.  But like I said before, hit me up if you're having trouble with it and I can help.
+If you want to make other changes, they can be made by hunting around in the script and finding what needs to change. Sorry about that.  It's kind of an 'As-Is' kind of thing.  But, hit me up if you're having trouble with it and I can help.
